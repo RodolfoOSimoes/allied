@@ -1,9 +1,14 @@
 import React from 'react';
 
-function Main(props) {
+import Header from '../components/Header';
+
+function MainTemplate(props) {
   return (
-    <React.Fragment>{ props.children }</React.Fragment>
+    <div>
+      <Header />
+      <div>{ props.children }</div>
+    </div>
   );
 }
 
-export default Main;
+export default MainTemplate;
