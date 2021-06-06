@@ -1,18 +1,23 @@
 import { createBrowserHistory } from 'history';
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
+import CustomerPage from './pages/CustomerPage';
+import PlansPage from './pages/PlansPage';
 import PlatformsPage from './pages/PlatformsPage';
 
 const browserHistory = createBrowserHistory();
 
 function App() {
   return (
-    <Router history={browserHistory}>
+    <BrowserRouter history={browserHistory}>
       <Switch>
-          <Route path="/" exact={true} component={PlatformsPage} />
+          <Redirect exact from="/" to="/plataformas" />
+          <Route path="/plataformas" component={PlatformsPage} />
+          <Route path="/planos" component={PlansPage} />
+          <Route path="/informacoes-pessoais" component={CustomerPage} />
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 }
 

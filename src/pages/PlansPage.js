@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -7,51 +7,55 @@ import Container from '../components/Container';
 import Painel from '../components/Painel';
 import ProductList from '../components/ProductList';
 import MainTemplate from '../templates/MainTemplate';
-import PlatformService from '../services/PlatformService';
-import { applyPlatform } from '../redux/modules/main';
+import PlanService from '../services/PlanService';
+import { applyPlan } from '../redux/modules/main';
 
 const PageForm = styled.div`
   margin: 120px auto 0 auto;
   max-width: 640px;
 `;
 
-function PlatformsPage() {
+function PlansPage() {
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const [platforms, setPlatforms] = useState([]);
+  const [plans, setPlans] = useState([]);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  async function loadPlatformList() {
+  const platformSku = useSelector(state => state.main.platformSku);
+
+  async function loadPlanList() {
     setLoading(true);
 
     let response;
     try {
-      response = await PlatformService.list();
+      response = await PlanService.getByPlatform(platformSku);
     } catch(e) {
       // Error cases were not dealt with due to lack of time.
     }
 
     if (response) {
-      setPlatforms(response.data.plataformas);
+      setPlans(response.data.planos);
     }
 
     setLoaded(true);
     setLoading(false);
   }
 
-  function formatProducts(platforms) {
-    return platforms.map(item => ({
-      sku: item['sku'],
-      title: item['nome'],
-      subtitle: item['descricao'],
-    }));
+  function formatProducts(plans) {
+    return plans
+      .filter(item => item['ativo'])
+      .map(item => ({
+        sku: item['sku'],
+        title: item['franquia'],
+        subtitle: item['valor'],
+      }));
   }
 
-  function findPlatform(sku) {
+  function findPlan(sku) {
     let result = null;
-    platforms.some(item => {
+    plans.some(item => {
       if (item['sku'] === sku) {
         result = item;
         return true;
@@ -61,16 +65,16 @@ function PlatformsPage() {
     return result;
   }
 
-  function handleSelectPlatform(sku) {
-    dispatch(applyPlatform({
+  function handleSelectPlan(sku) {
+    dispatch(applyPlan({
       sku,
-      data: findPlatform(sku),
+      data: findPlan(sku),
     }));
-    history.push('/planos');
+    history.push('/informacoes-pessoais');
   }
 
   if (!loaded && !loading) {
-    loadPlatformList();
+    loadPlanList();
   }
 
   return (
@@ -78,11 +82,11 @@ function PlatformsPage() {
         <Container>
           <PageForm>
             <Painel
-              title="Plataformas"
+              title="Planos"
             >
               <ProductList
-                products={formatProducts(platforms)}
-                onSelect={handleSelectPlatform}
+                products={formatProducts(plans)}
+                onSelect={handleSelectPlan}
               />
             </Painel>
           </PageForm>
@@ -91,4 +95,4 @@ function PlatformsPage() {
   );
 }
 
-export default PlatformsPage;
+export default PlansPage;

@@ -12,7 +12,7 @@ const HeaderRoot = styled.header`
   left: 0;
   z-index: 100;
   background: #003b71;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 50%);
+  box-shadow: rgb(159 162 191 / 18%) 0px 2px 3px, rgb(159 162 191 / 32%) 0px 1px 1px;
   width: 100%;
 `;
 
