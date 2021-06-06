@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Container from '../components/Container';
-import Painel from '../components/Painel';
+import Panel from '../components/Panel';
 import ProductList from '../components/ProductList';
 import MainTemplate from '../templates/MainTemplate';
 import PlanService from '../services/PlanService';
@@ -81,14 +81,15 @@ function PlansPage() {
       <MainTemplate>
         <Container>
           <PageForm>
-            <Painel
+            <Panel
               title="Planos"
+              subtitle="Selecione o plano."
             >
               <ProductList
                 products={formatProducts(plans)}
                 onSelect={handleSelectPlan}
               />
-            </Painel>
+            </Panel>
           </PageForm>
         </Container>
       </MainTemplate>

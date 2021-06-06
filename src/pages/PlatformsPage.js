@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Container from '../components/Container';
-import Painel from '../components/Painel';
+import Panel from '../components/Panel';
 import ProductList from '../components/ProductList';
 import MainTemplate from '../templates/MainTemplate';
 import PlatformService from '../services/PlatformService';
@@ -77,14 +77,15 @@ function PlatformsPage() {
       <MainTemplate>
         <Container>
           <PageForm>
-            <Painel
+            <Panel
               title="Plataformas"
+              subtitle="Selecione a plataforma."
             >
               <ProductList
                 products={formatProducts(platforms)}
                 onSelect={handleSelectPlatform}
               />
-            </Painel>
+            </Panel>
           </PageForm>
         </Container>
       </MainTemplate>

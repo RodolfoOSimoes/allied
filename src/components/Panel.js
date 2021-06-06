@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-const PaineRoot = styled.div`
+const PanelRoot = styled.div`
   background-color: #FFFFFF;
   color: rgb(34, 51, 84);
   border-radius: 6px;
@@ -10,11 +10,11 @@ const PaineRoot = styled.div`
   overflow: hidden;
 `;
 
-const PainelHeader = styled.div`
+const PanelHeader = styled.div`
   padding: 16px;
 `;
 
-const PainelHeaderTitle = styled.h3`
+const PanelHeaderTitle = styled.h3`
   display: block;
   margin: 0px;
   font-family: Roboto;
@@ -23,7 +23,7 @@ const PainelHeaderTitle = styled.h3`
   line-height: 1.334;
 `;
 
-const PainelHeaderSubtitle = styled.p`
+const PanelHeaderSubtitle = styled.p`
   font-family: Roboto;
   font-weight: 400;
   font-size: 1.4rem;
@@ -37,38 +37,38 @@ const PainelHeaderSubtitle = styled.p`
   margin: 0px;
 `;
 
-const PainelBody = styled.div`
+const PanelBody = styled.div`
   padding-bottom: 16px;
 `;
 
-function Painel(props) {
+function Panel(props) {
   return (
-    <PaineRoot>
+    <PanelRoot>
       {props.title !== '' && (
-        <PainelHeader>
+        <PanelHeader>
           {props.title !== '' && (
-            <PainelHeaderTitle>{ props.title }</PainelHeaderTitle>
+            <PanelHeaderTitle>{ props.title }</PanelHeaderTitle>
           )}
           {props.subtitle !== '' && (
-            <PainelHeaderSubtitle>{ props.subtitle }</PainelHeaderSubtitle>
+            <PanelHeaderSubtitle>{ props.subtitle }</PanelHeaderSubtitle>
           )}
-        </PainelHeader>
+        </PanelHeader>
       )}
-      <PainelBody>
+      <PanelBody>
         { props.children }
-      </PainelBody>
-    </PaineRoot>
+      </PanelBody>
+    </PanelRoot>
   );
 }
 
-Painel.propTypes = {
+Panel.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string,
 };
 
-Painel.defaultProps = {
+Panel.defaultProps = {
   title: '',
   subtitle: '',
 };
 
-export default Painel;
+export default Panel;

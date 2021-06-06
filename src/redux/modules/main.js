@@ -7,6 +7,11 @@ export const main = createSlice({
     platformData: null,
     planSku: '',
     planData: null,
+    userName: '',
+    userEmail: '',
+    userBirthDate: '',
+    userDocumentNumber: '',
+    userPhoneNumber: '',
   },
   reducers: {
     applyPlatform(state, action) {
@@ -17,6 +22,13 @@ export const main = createSlice({
       state.planSku = action.payload.sku;
       state.planData = action.payload.data;
     },
+    appyUser(state, action) {
+      state.userName = action.payload.userName;
+      state.userEmail = action.payload.userEmail;
+      state.userBirthDate = action.payload.userBirthDate;
+      state.userDocumentNumber = action.payload.userDocumentNumber;
+      state.userPhoneNumber = action.payload.userPhoneNumber;
+    }
   },
 });
 
